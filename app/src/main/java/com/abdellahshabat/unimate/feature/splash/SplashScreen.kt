@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.School
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable //هذه الـ Annotation تخبر Compose أن الدالة مسؤولة عن رسم واجهة المستخدم. لن يعتبر Compose الدالة شاشة أو عنصر واجهة.
