@@ -41,3 +41,31 @@ SplashScreen()
 هي أيضًا Composable.
 
 أي أن الشاشة ليست شيئًا مميزًا، بل هي دالة تجمع عدة Composables معًا.
+
+كيف يعمل Navigation في Compose؟
+
+يتكون من 3 أجزاء رئيسية:
+
+1. NavController هو المسؤول عن التنقل.
+
+مثلاً: navController.navigate("login")
+
+يعني: اذهب إلى شاشة Login.
+
+2. NavHost هو المكان الذي يجمع جميع الشاشات.
+
+مثلاً: NavHost
+
+├── Splash
+
+├── OnBoarding
+
+├── Login
+
+├── Register
+
+├── Home
+
+3. Route كل شاشة لها اسم.
+
+مثلاً:"splash""login""register""home"
