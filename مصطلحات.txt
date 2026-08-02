@@ -70,9 +70,17 @@ SplashScreen()
 
 مثلاً:"splash""login""register""home"
 
-------
+-------------------------------------------------------------*-------
 تعلمت ثلاثة مفاهيم أساسية في Navigation:
 
 NavController: المسؤول عن تنفيذ عمليات التنقل.
 NavHost: الحاوية التي تضم جميع الشاشات.
 Route: الاسم الفريد لكل شاشة.
+-----------------------------------------------------------------------
+من أهم مفاهيم Jetpack Compose Navigation.
+LaunchedEffect
+delay()
+navController.navigate()
+popUpTo()
+
+

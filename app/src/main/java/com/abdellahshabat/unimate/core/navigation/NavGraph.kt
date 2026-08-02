@@ -4,12 +4,13 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.abdellahshabat.unimate.feature.onboarding.OnBoardingScreen
 import com.abdellahshabat.unimate.feature.splash.SplashScreen
 
 @Composable
 fun NavGraph() {
-//rememberNavController ينشئ كائنًا مسؤولًا عن التنقل بين الشاشات.تخيله كأنه سائق ينقل المستخدم من شاشة إلى أخرى.
-    val navController = rememberNavController()
+    //rememberNavController ينشئ كائنًا مسؤولًا عن التنقل بين الشاشات.تخيله كأنه سائق ينقل المستخدم من شاشة إلى أخرى.
+    val navController = rememberNavController() //العقل المدبر
 
     //NavHost(...) هو الحاوية التي تحتوي جميع الشاشات. كل شاشة نضيفها لاحقًا ستكون داخل هذا الجزء.
     NavHost(
@@ -17,9 +18,12 @@ fun NavGraph() {
         //startDestination هذه هي أول شاشة تظهر عند تشغيل التطبيق.
         startDestination = Screen.Splash.route
     ) {
-
+        //composable  كل شاشة في التطبيق يجب تسجيلها هنا.
         composable(Screen.Splash.route) {
             SplashScreen()
+        }
+        composable(Screen.OnBoarding.route) {
+            OnBoardingScreen()
         }
 
     }
