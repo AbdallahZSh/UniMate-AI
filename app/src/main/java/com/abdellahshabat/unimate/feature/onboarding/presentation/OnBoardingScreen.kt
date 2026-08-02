@@ -17,8 +17,13 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.*
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.NavGraph.Companion.findStartDestination
+import com.abdellahshabat.unimate.core.datastore.PreferenceRepository
+import com.abdellahshabat.unimate.core.navigation.Routes
 import com.abdellahshabat.unimate.feature.onboarding.model.onBoardingPages
 import com.abdellahshabat.unimate.feature.onboarding.presentation.components.PagerIndicator
 import kotlinx.coroutines.launch
@@ -26,8 +31,8 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun OnBoardingScreen() {
-    val scope = rememberCoroutineScope()
+fun OnBoardingScreen(navController: NavController) {
+
     //pagerState
     //يحفظ: الصفحة الحالية.عدد الصفحات.حالة السحب.
     //مثلاً: Page 0 Page 1 Page 2
@@ -36,7 +41,11 @@ fun OnBoardingScreen() {
             onBoardingPages.size
         }
     )
+    val context = LocalContext.current
 
+    val repository = PreferenceRepository(context)
+
+    val scope = rememberCoroutineScope()
 
     Column(
         modifier = Modifier
@@ -108,12 +117,31 @@ fun OnBoardingScreen() {
         Spacer(modifier = Modifier.height(20.dp))
 
         Button(onClick = {
+
             scope.launch {
-                pagerState.animateScrollToPage(
-                    pagerState.currentPage + 1
-                )
+
+                if (pagerState.currentPage == onBoardingPages.lastIndex) {
+
+                    repository.saveOnBoardingState()
+
+                    navController.navigate(Routes.Login) {
+
+                        popUpTo(navController.graph.findStartDestination().id)
+
+                        launchSingleTop = true
+
+                    }
+
+                } else {
+
+                    pagerState.animateScrollToPage(
+                        pagerState.currentPage + 1
+                    )
+
+                }
 
             }
+
         }) {
             Text(
 

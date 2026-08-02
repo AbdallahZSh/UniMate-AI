@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.abdellahshabat.unimate.feature.auth.presentation.LoginScreen
 import com.abdellahshabat.unimate.feature.onboarding.presentation.OnBoardingScreen
 import com.abdellahshabat.unimate.feature.splash.presentation.SplashScreen
 
@@ -23,7 +24,10 @@ fun NavGraph() {
             SplashScreen(navController)
         }
         composable(Screen.OnBoarding.route) {
-            OnBoardingScreen()
+            OnBoardingScreen(navController)
+        }
+        composable(Routes.Login) {
+            LoginScreen()
         }
 
     }
