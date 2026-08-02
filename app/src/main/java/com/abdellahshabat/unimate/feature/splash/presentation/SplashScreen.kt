@@ -1,5 +1,7 @@
 package com.abdellahshabat.unimate.feature.splash.presentation
-
+//لماذا لا نضع المنطق داخل SplashScreen؟
+//
+//لأن شاشة Compose يجب أن تكون مسؤولة عن الرسم فقط.
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -16,11 +18,14 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier  //Modifier هو الوسيلة التي نتحكم بها في شكل العنصر وسلوكه.
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.abdellahshabat.unimate.core.navigation.Screen
 import kotlinx.coroutines.delay
 @Composable
 fun SplashScreen(navController: NavHostController) {
+
+    val viewModel: SplashViewModel = viewModel()
     //تشغّل الكود مرة واحدة فقط عند ظهور الشاشة. LaunchedEffect
     //onCreate()  تشبه:
     LaunchedEffect(Unit) {
