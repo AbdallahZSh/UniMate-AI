@@ -1,0 +1,26 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="200"
+    android:viewportHeight="200">
+
+    <!-- AI Circle -->
+    <path
+        android:fillColor="#1565C0"
+        android:pathData="M100,20 A80,80 0,1 0,100 180 A80,80 0,1 0,100 20"/>
+
+    <!-- Robot Face -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M60,70 Q100,40 140,70 L140,130 Q100,160 60,130 Z"/>
+
+    <!-- Eyes -->
+    <path
+        android:fillColor="#43A047"
+        android:pathData="M80,90 A10,10 0,1 0,80.1 90"/>
+
+    <path
+        android:fillColor="#43A047"
+        android:pathData="M120,90 A10,10 0,1 0,120.1 90"/>
+
+</vector>
