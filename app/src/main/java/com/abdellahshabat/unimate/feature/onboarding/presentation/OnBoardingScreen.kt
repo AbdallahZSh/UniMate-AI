@@ -16,15 +16,18 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.*
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.abdellahshabat.unimate.feature.onboarding.model.onBoardingPages
+import com.abdellahshabat.unimate.feature.onboarding.presentation.components.PagerIndicator
+import kotlinx.coroutines.launch
 
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun OnBoardingScreen() {
-
+    val scope = rememberCoroutineScope()
     //pagerState
     //يحفظ: الصفحة الحالية.عدد الصفحات.حالة السحب.
     //مثلاً: Page 0 Page 1 Page 2
@@ -36,7 +39,9 @@ fun OnBoardingScreen() {
 
 
     Column(
-        modifier = Modifier.fillMaxSize().padding(24.dp),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(24.dp),
 
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -96,11 +101,28 @@ fun OnBoardingScreen() {
                 )
             }
         }
-
+        PagerIndicator(
+            pageCount = onBoardingPages.size,
+            currentPage = pagerState.currentPage
+        )
         Spacer(modifier = Modifier.height(20.dp))
 
-        Button(onClick = {}) {
-            Text(text = "Next")
+        Button(onClick = {
+            scope.launch {
+                pagerState.animateScrollToPage(
+                    pagerState.currentPage + 1
+                )
+
+            }
+        }) {
+            Text(
+
+                if(pagerState.currentPage == onBoardingPages.lastIndex)
+                    "Get Started"
+                else
+                    "Next"
+
+            )
         }
 
     }
