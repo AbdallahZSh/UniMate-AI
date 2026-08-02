@@ -12,13 +12,45 @@ import androidx.compose.material.icons.filled.School
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable //هذه الـ Annotation تخبر Compose أن الدالة مسؤولة عن رسم واجهة المستخدم. لن يعتبر Compose الدالة شاشة أو عنصر واجهة.
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier  //Modifier هو الوسيلة التي نتحكم بها في شكل العنصر وسلوكه.
 import androidx.compose.ui.unit.dp
-
+import androidx.navigation.NavHostController
+import com.abdellahshabat.unimate.core.navigation.Screen
+import kotlinx.coroutines.delay
 @Composable
-fun SplashScreen() {
+fun SplashScreen(navController: NavHostController) {
+    //تشغّل الكود مرة واحدة فقط عند ظهور الشاشة. LaunchedEffect
+    //onCreate()  تشبه:
+    LaunchedEffect(Unit) {
 
+        delay(2000) //انتظر ثانيتين.
+
+        navController.navigate(Screen.OnBoarding.route) { //انتقل إلى الشاشة التالية.
+
+            popUpTo(Screen.Splash.route) {
+                inclusive = true  //احذف شاشة Splash نفسها أيضًا.
+            }
+            //popUpTo(...)
+            //هذه من أهم أوامر Navigation.
+            //بدونها سيكون الـ Back Stack:
+            //Splash
+            //OnBoarding
+            //وعند الضغط على زر الرجوع:
+            //⬅️ سيعود إلى Splash.
+            //أما باستخدام:
+            //popUpTo(...)
+            //سيصبح:
+            //OnBoarding
+            //فقط.
+            //أي أن Splash تُحذف من الذاكرة.
+            //لو كانت:
+            //false
+            //فستبقى داخل الـ Back Stack.
+        }
+
+    }
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
@@ -43,16 +75,6 @@ fun SplashScreen() {
         Spacer(modifier = Modifier.height(32.dp))
 
         CircularProgressIndicator()
-
-        Text(
-            text = "\n\n\nWelcome to Abdellah",
-            style = MaterialTheme.typography.bodyLarge
-        )
-
-        Text(
-            text = "\nLoading...",
-            style = MaterialTheme.typography.bodyLarge
-        )
 
     }
 }

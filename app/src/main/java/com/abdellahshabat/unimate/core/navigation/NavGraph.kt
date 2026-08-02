@@ -20,7 +20,7 @@ fun NavGraph() {
     ) {
         //composable  كل شاشة في التطبيق يجب تسجيلها هنا.
         composable(Screen.Splash.route) {
-            SplashScreen()
+            SplashScreen(navController)
         }
         composable(Screen.OnBoarding.route) {
             OnBoardingScreen()

@@ -23,5 +23,15 @@ fun OnBoardingScreen() {
             style = MaterialTheme.typography.headlineMedium
         )
 
+        Text(
+            text = "\n\n\nWelcome to Abdellah",
+            style = MaterialTheme.typography.bodyLarge
+        )
+
+        Text(
+            text = "\nLoading...",
+            style = MaterialTheme.typography.bodyLarge
+        )
+
     }
 }
