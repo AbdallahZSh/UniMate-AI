@@ -9,29 +9,99 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 //OnBoardingScreen لأن الـ Navigation لا يستطيع الانتقال إلى شاشة غير موجودة.
+
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.material3.*
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
+import com.abdellahshabat.unimate.feature.onboarding.model.onBoardingPages
+
+
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun OnBoardingScreen() {
 
+    //pagerState
+    //يحفظ: الصفحة الحالية.عدد الصفحات.حالة السحب.
+    //مثلاً: Page 0 Page 1 Page 2
+    val pagerState = rememberPagerState(
+        pageCount = {
+            onBoardingPages.size
+        }
+    )
+
+
     Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
+        modifier = Modifier.fillMaxSize().padding(24.dp),
+
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
-        Text(
-            text = "OnBoarding Screen",
-            style = MaterialTheme.typography.headlineMedium
-        )
+        //المستخدم يسحب يمين ويسار.Instagram Stories
+        HorizontalPager(
+            state = pagerState,
+            modifier = Modifier.weight(1f)
+        ) { page ->
+            //page
+            //يمثل رقم الصفحة الحالية. مثلاً: page = 0 يعرض: Welcome to UniMate AI
 
-        Text(
-            text = "\n\n\nWelcome to Abdellah",
-            style = MaterialTheme.typography.bodyLarge
-        )
+            Column(
 
-        Text(
-            text = "\nLoading...",
-            style = MaterialTheme.typography.bodyLarge
-        )
+                modifier = Modifier.fillMaxSize(),
+
+                horizontalAlignment = Alignment.CenterHorizontally,
+
+                verticalArrangement = Arrangement.Center
+
+            ) {
+
+
+                Image(
+
+                    painter = painterResource(
+                        id = onBoardingPages[page].imageRes
+                    ),
+
+                    contentDescription = null,
+
+                    modifier = Modifier.size(220.dp)
+
+                )
+
+
+                Spacer(modifier = Modifier.height(40.dp))
+
+
+                Text(
+
+                    text = onBoardingPages[page].title,
+
+                    style = MaterialTheme.typography.headlineMedium
+
+                )
+
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+
+                Text(
+                    text = onBoardingPages[page].description,
+
+                    style = MaterialTheme.typography.bodyLarge
+
+                )
+            }
+        }
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        Button(onClick = {}) {
+            Text(text = "Next")
+        }
 
     }
 }
