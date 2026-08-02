@@ -11,7 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.abdellahshabat.unimate.feature.splash.SplashScreen
+import com.abdellahshabat.unimate.core.navigation.NavGraph
 import com.abdellahshabat.unimate.ui.theme.UniMateTheme
 
 class MainActivity : ComponentActivity() {
@@ -25,7 +25,9 @@ class MainActivity : ComponentActivity() {
         //داخلها نستدعي أي شاشة نريدها.
         setContent {
             UniMateTheme {
-                SplashScreen()
+                NavGraph()
+                //بدل أن تعرض MainActivity شاشة واحدة مباشرة وهي الصبلش ، ستعرض NavGraph.
+                //وNavGraph هو الذي سيقرر أي شاشة تظهر.
             }
         }
     }

@@ -69,3 +69,10 @@ SplashScreen()
 3. Route كل شاشة لها اسم.
 
 مثلاً:"splash""login""register""home"
+
+------
+تعلمت ثلاثة مفاهيم أساسية في Navigation:
+
+NavController: المسؤول عن تنفيذ عمليات التنقل.
+NavHost: الحاوية التي تضم جميع الشاشات.
+Route: الاسم الفريد لكل شاشة.
