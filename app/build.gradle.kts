@@ -61,4 +61,7 @@ dependencies {
     //implementation("androidx.navigation:navigation-compose:2.9.3")
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.compose.foundation)
+    //سنستخدم Jetpack DataStore لأنه البديل الحديث لـ SharedPreferences.
+    //حفظ أن المستخدم شاهد OnBoarding باستخدام DataStore
+    implementation("androidx.datastore:datastore-preferences:1.1.7")
 }
