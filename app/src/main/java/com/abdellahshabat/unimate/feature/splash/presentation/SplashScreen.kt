@@ -1,4 +1,4 @@
-package com.abdellahshabat.unimate.feature.splash
+package com.abdellahshabat.unimate.feature.splash.presentation
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

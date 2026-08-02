@@ -4,8 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.abdellahshabat.unimate.feature.onboarding.OnBoardingScreen
-import com.abdellahshabat.unimate.feature.splash.SplashScreen
+import com.abdellahshabat.unimate.feature.onboarding.presentation.OnBoardingScreen
+import com.abdellahshabat.unimate.feature.splash.presentation.SplashScreen
 
 @Composable
 fun NavGraph() {

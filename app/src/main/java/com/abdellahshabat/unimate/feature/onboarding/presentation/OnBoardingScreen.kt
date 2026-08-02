@@ -1,4 +1,4 @@
-package com.abdellahshabat.unimate.feature.onboarding
+package com.abdellahshabat.unimate.feature.onboarding.presentation
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
