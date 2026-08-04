@@ -15,18 +15,29 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable //هذه الـ Annotation تخبر Compose أن الدالة مسؤولة عن رسم واجهة المستخدم. لن يعتبر Compose الدالة شاشة أو عنصر واجهة.
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier  //Modifier هو الوسيلة التي نتحكم بها في شكل العنصر وسلوكه.
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.abdellahshabat.unimate.core.navigation.Screen
 import kotlinx.coroutines.delay
+
+/**
+ * Reads onboarding state from DataStore.
+ * If completed -> Login
+ * Otherwise -> OnBoarding.
+ */
 @Composable
 fun SplashScreen(navController: NavHostController) {
-
-    val viewModel: SplashViewModel = viewModel()
-    //تشغّل الكود مرة واحدة فقط عند ظهور الشاشة. LaunchedEffect
+    /**
+     * SplashViewModel decides the first screen
+     * based on the onboarding completion state.
+     */
+    val viewModel: SplashViewModel = hiltViewModel()    //تشغّل الكود مرة واحدة فقط عند ظهور الشاشة. LaunchedEffect
+    val startDestination by viewModel.startDestination.collectAsState()
     //onCreate()  تشبه:
     LaunchedEffect(Unit) {
 

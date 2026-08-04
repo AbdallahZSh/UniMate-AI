@@ -15,11 +15,9 @@ import javax.inject.Singleton
 object AppModule {
 //    @Provides يعني:
 //    إذا احتاج أي كلاس PreferenceRepository، أنشئه بهذه الطريقة.
-//    @Singleton يعني:
-//كل التطبيق
-//↓
-//نسخة واحدة فقط من PreferenceRepository
-//    بدلاً من إنشاء نسخة جديدة في كل شاشة.
+//    @Singleton يعنييعني:
+//أنشئ نسخة واحدة فقط طوال عمر التطبيق.
+//      بدلًا من إنشاء Repository جديد في كل شاشة.
 //    @ApplicationContext
 //يجلب Context الخاص بالتطبيق وليس بالنشاط (Activity)، وهذا هو الخيار الصحيح مع DataStore.
     @Provides

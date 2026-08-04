@@ -7,19 +7,21 @@ package com.abdellahshabat.unimate.feature.splash.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.abdellahshabat.unimate.core.datastore.PreferenceRepository
+import com.abdellahshabat.unimate.core.navigation.Routes
+import dagger.hilt.android.lifecycle.HiltViewModel
+import jakarta.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class SplashViewModel(
+@HiltViewModel
+class SplashViewModel @Inject constructor(
     private val repository: PreferenceRepository
-) : ViewModel() {
+) : ViewModel(){
 
-    private var _startDestination =
-        MutableStateFlow("")
-
-    val startDestination: StateFlow<String> =
-        _startDestination
+    private val _startDestination =
+        MutableStateFlow(Routes.OnBoarding)
+    val startDestination: StateFlow<String> = _startDestination
 
     init {
         checkOnBoardingState()
@@ -31,11 +33,11 @@ class SplashViewModel(
 
             repository.onboardingCompleted.collect { completed ->
 
-                _startDestination =
+                _startDestination.value =
                     if (completed)
-                        MutableStateFlow("login")
+                        Routes.Login
                     else
-                        MutableStateFlow("onboarding")
+                        Routes.OnBoarding
 
             }
 
