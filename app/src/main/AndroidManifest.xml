@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
+        android:name=".UniMateApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -25,3 +26,17 @@
     </application>
 
 </manifest>
+<!--    android:name=".UniMateApplication"
+لماذا؟
+عند تشغيل التطبيق يصبح التسلسل:
+Android
+↓
+UniMateApplication
+↓
+Hilt
+↓
+Repositories
+↓
+ViewModels
+↓
+Screens-->
