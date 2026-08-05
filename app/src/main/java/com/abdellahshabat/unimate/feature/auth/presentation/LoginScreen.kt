@@ -13,12 +13,14 @@ import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.getValue
@@ -29,11 +31,15 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.abdellahshabat.unimate.feature.auth.presentation.login.LoginViewModel
 
 
 @Composable
 fun LoginScreen() {
+    val viewModel: LoginViewModel = hiltViewModel()
 
+    val state by viewModel.state.collectAsState()
     //هذا يجعل Compose يعيد رسم الشاشة عندما تتغير القيمة.
     // ,حفظ البريد الإلكتروني الذي يكتبه المستخدم
     /*المستخدم كتب:abd@gmail.com
@@ -177,13 +183,19 @@ fun LoginScreen() {
 
         Spacer(modifier = Modifier.height(32.dp))
 
-        Button(
+        if(state.isLoading){
 
-            onClick = { // لاحقاً سيتم استدعاء ViewModel هنا
+            CircularProgressIndicator()
+
+        }else{
+
+            Button(
+                onClick = {
+                    viewModel.login(email, password)
+                }
+            ){
+                Text("Login")
             }
-
-        ){
-            Text(text = "Login")
         }
     }
 }
