@@ -9,7 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.abdellahshabat.unimate.core.datastore.PreferenceRepository
 import com.abdellahshabat.unimate.core.navigation.Routes
 import dagger.hilt.android.lifecycle.HiltViewModel
-import jakarta.inject.Inject
+import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
