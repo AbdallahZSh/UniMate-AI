@@ -1,4 +1,4 @@
-package com.abdellahshabat.unimate
+package com.abdellahshabat.unimate.feature.auth.presentation
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -19,6 +19,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -34,6 +35,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.abdellahshabat.unimate.core.navigation.Routes
 import com.abdellahshabat.unimate.core.navigation.Screen
 import com.abdellahshabat.unimate.feature.auth.presentation.login.LoginViewModel
 
@@ -51,15 +53,15 @@ fun LoginScreen(
     // ,حفظ البريد الإلكتروني الذي يكتبه المستخدم
     /*المستخدم كتب:abd@gmail.com
      تتغير قيمة:email فتتحدث الواجهة.*/
-    var email by remember {
-        mutableStateOf("")
-    }
-
-
-    // حفظ كلمة المرور
-    var password by remember {
-        mutableStateOf("")
-    }
+//    var email by remember {
+//        mutableStateOf("")
+//    }
+//
+//
+//    // حفظ كلمة المرور
+//    var password by remember {
+//        mutableStateOf("")
+//    }
 
 
     // التحكم في إظهار أو إخفاء كلمة المرور
@@ -215,6 +217,16 @@ fun LoginScreen(
                 }
             ) {
                 Text("Login")
+            }
+
+            TextButton(
+                onClick = {
+                    navController.navigate(Routes.Register)
+                }
+
+            ){
+
+                Text("Create Account")
             }
         }
 

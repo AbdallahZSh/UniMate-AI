@@ -21,8 +21,10 @@ fun HomeScreen() {
     ) {
 
         Text(
-            text = "Welcome to UniMate AI In Home",
+            text = "Welcome to\nUniMate AI 🎓",
             style = MaterialTheme.typography.headlineMedium
         )
+
     }
+
 }
