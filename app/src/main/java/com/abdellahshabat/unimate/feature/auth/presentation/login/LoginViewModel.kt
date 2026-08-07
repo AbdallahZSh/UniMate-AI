@@ -16,34 +16,48 @@ class LoginViewModel @Inject constructor(
 
     private val repository: AuthRepository
 
-): ViewModel(){
+): ViewModel() {
     private val _state = MutableStateFlow(LoginState())
 
-    val state:StateFlow<LoginState> = _state
+    //نشأنا StateFlow<LoginState> ليحمل حالة الشاشة كاملة.
+    val state: StateFlow<LoginState> = _state
 
-    fun login(
-        email:String,
-        password:String
-    ){
+    //أضفنا onEmailChange() لتحديث البريد.
+    fun onEmailChange(email: String) {
+        _state.value = _state.value.copy(email = email)
+    }
+
+//    أضفنا onPasswordChange() لتحديث كلمة المرور.
+    fun onPasswordChange(password: String) {
+        _state.value = _state.value.copy(password = password)
+    }
+
+//    أضفنا login() لاستدعاء AuthRepository والتعامل مع النجاح أو الفشل.
+    fun login() {
 
         viewModelScope.launch {
 
-            _state.value = LoginState(isLoading = true)
+            _state.value = _state.value.copy(
+                isLoading = true,
+                error = null
+            )
 
-            val result = repository.login(email, password)
+            val result = repository.login(
+                _state.value.email,
+                _state.value.password
+            )
 
-            _state.value = if(result.isSuccess){
-
-                    LoginState(success = true)
-
-                }else{
-
-                    LoginState(error = result.exceptionOrNull()?.message)
-
-                }
-
+            _state.value = if (result.isSuccess) {
+                _state.value.copy(
+                    isLoading = false,
+                    success = true
+                )
+            } else {
+                _state.value.copy(
+                    isLoading = false,
+                    error = result.exceptionOrNull()?.message
+                )
+            }
         }
-
     }
-
 }

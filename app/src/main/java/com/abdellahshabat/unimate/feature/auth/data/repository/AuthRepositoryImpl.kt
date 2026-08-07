@@ -24,15 +24,31 @@ class AuthRepositoryImpl @Inject constructor(
     }
 
     override suspend fun register(email: String, password: String): Result<Unit> {
-        TODO("Not yet implemented")
+
+        return try {
+
+            dataSource.register(email, password)
+            Result.success(Unit)
+
+        } catch (e: Exception) {
+
+            Result.failure(e)
+
+        }
     }
 
     override suspend fun logout() {
-        TODO("Not yet implemented")
+
+        dataSource.logout()
+
     }
 
     override fun currentUserId(): String? {
-        TODO("Not yet implemented")
+        //وهذه سترجع:
+        //UID إذا كان المستخدم مسجلاً، أو:
+        //null إذا لم يكن هناك مستخدم.
+        return dataSource.currentUserId()
+
     }
 
 }

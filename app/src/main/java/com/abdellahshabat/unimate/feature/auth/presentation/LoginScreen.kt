@@ -20,6 +20,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -32,14 +33,20 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
+import com.abdellahshabat.unimate.core.navigation.Screen
 import com.abdellahshabat.unimate.feature.auth.presentation.login.LoginViewModel
 
 
 @Composable
-fun LoginScreen() {
-    val viewModel: LoginViewModel = hiltViewModel()
+fun LoginScreen(
+    navController: NavHostController,
+
+    viewModel: LoginViewModel = hiltViewModel()
+) {
 
     val state by viewModel.state.collectAsState()
+
     //هذا يجعل Compose يعيد رسم الشاشة عندما تتغير القيمة.
     // ,حفظ البريد الإلكتروني الذي يكتبه المستخدم
     /*المستخدم كتب:abd@gmail.com
@@ -60,7 +67,20 @@ fun LoginScreen() {
         mutableStateOf(false)
     }
 
+    LaunchedEffect(state.success) {
 
+        if (state.success) {
+
+            navController.navigate(Screen.Home.route) {
+
+                popUpTo(Screen.Login.route) {
+                    //حتى لا يستطيع المستخدم الضغط Back والعودة إلى Login.
+                    inclusive = true
+                }
+
+            }
+        }
+    }
     Column(
 
         modifier = Modifier
@@ -85,10 +105,10 @@ fun LoginScreen() {
         //استخدمناه لأنه يعطي: Border/ Label/ Animation /دعم Compose
         OutlinedTextField(
 
-            value = email,
+            value = state.email,
 
             onValueChange = {
-                email = it
+                viewModel.onEmailChange(it)
             },
 
             label = {
@@ -120,10 +140,10 @@ fun LoginScreen() {
         //هذا الجزء: PasswordVisualTransformation() يجعل: 123456 تظهر:••••••
         OutlinedTextField(
 
-            value = password,
+            value = state.password,
 
             onValueChange = {
-                password = it
+                viewModel.onPasswordChange(it)
             },
 
 
@@ -183,19 +203,31 @@ fun LoginScreen() {
 
         Spacer(modifier = Modifier.height(32.dp))
 
-        if(state.isLoading){
+        if (state.isLoading) {
 
             CircularProgressIndicator()
 
-        }else{
+        } else {
 
             Button(
                 onClick = {
-                    viewModel.login(email, password)
+                    viewModel.login()
                 }
-            ){
+            ) {
                 Text("Login")
             }
+        }
+
+        state.error?.let { error ->
+
+            Spacer(
+                modifier = Modifier.height(16.dp)
+            )
+
+            Text(
+                text = error,
+                color = MaterialTheme.colorScheme.error
+            )
         }
     }
 }
