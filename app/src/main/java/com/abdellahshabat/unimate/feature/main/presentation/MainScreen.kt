@@ -97,7 +97,27 @@ fun MainScreen() {
 
             when (selectedItem) {
 
-                0 -> HomeScreen()
+                0 -> HomeScreen(
+                    onCoursesClick = {
+                        selectedItem = 1
+                    },
+
+                    onAiClick = {
+                        selectedItem = 2
+                    },
+
+                    onTasksClick = {
+                        // سنضيف Tasks لاحقًا
+                    },
+
+                    onNotesClick = {
+                        // سنضيف Notes لاحقًا
+                    },
+
+                    onQuizClick = {
+                        // سنضيف Quiz لاحقًا
+                    }
+                )
 
                 1 -> CoursesScreen()
 
