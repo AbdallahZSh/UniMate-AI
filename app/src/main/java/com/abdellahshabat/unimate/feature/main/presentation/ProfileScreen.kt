@@ -1,4 +1,4 @@
-package com.abdellahshabat.unimate.feature.home.presentation
+package com.abdellahshabat.unimate.feature.main.presentation
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -10,21 +10,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
 @Composable
-fun HomeScreen() {
+fun ProfileScreen() {
 
     Column(
         modifier = Modifier.fillMaxSize(),
-
         horizontalAlignment = Alignment.CenterHorizontally,
-
         verticalArrangement = Arrangement.Center
     ) {
 
         Text(
-            text = "Welcome to\nUniMate AI 🎓",
+            text = "Profile",
             style = MaterialTheme.typography.headlineMedium
         )
 
     }
-
 }

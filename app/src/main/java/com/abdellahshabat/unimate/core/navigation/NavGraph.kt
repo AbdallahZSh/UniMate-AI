@@ -6,10 +6,17 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.abdellahshabat.unimate.feature.auth.presentation.LoginScreen
 import com.abdellahshabat.unimate.feature.auth.presentation.register.RegisterScreen
-import com.abdellahshabat.unimate.feature.home.presentation.HomeScreen
+import com.abdellahshabat.unimate.feature.main.presentation.HomeScreen
+import com.abdellahshabat.unimate.feature.main.presentation.MainScreen
 import com.abdellahshabat.unimate.feature.onboarding.presentation.OnBoardingScreen
 import com.abdellahshabat.unimate.feature.splash.presentation.SplashScreen
-
+//الـ NavGraph مسؤول عن المستوى الأعلى:
+//
+//Splash
+//OnBoarding
+//Login
+//Register
+//Main
 @Composable
 fun NavGraph() {
     //rememberNavController ينشئ كائنًا مسؤولًا عن التنقل بين الشاشات.تخيله كأنه سائق ينقل المستخدم من شاشة إلى أخرى.
@@ -36,6 +43,9 @@ fun NavGraph() {
         }
         composable(route = Screen.Register.route) {
             RegisterScreen()
+        }
+        composable(Routes.Main) {
+            MainScreen()
         }
 
     }

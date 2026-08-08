@@ -43,7 +43,7 @@ class SplashViewModel @Inject constructor(
 
                         if(authRepository.isUserLoggedIn())
 
-                            Routes.Home
+                            Routes.Main
 
                         else
 

@@ -73,7 +73,7 @@ fun LoginScreen(
 
         if (state.success) {
 
-            navController.navigate(Screen.Home.route) {
+            navController.navigate(Routes.Main) {
 
                 popUpTo(Screen.Login.route) {
                     //حتى لا يستطيع المستخدم الضغط Back والعودة إلى Login.
