@@ -23,4 +23,10 @@ class FirebaseAuthDataSource @Inject constructor(){
     fun currentUserId(): String? {
         return auth.currentUser?.uid
     }
+
+    fun isUserLoggedIn(): Boolean {
+
+        return auth.currentUser != null
+
+    }
 }

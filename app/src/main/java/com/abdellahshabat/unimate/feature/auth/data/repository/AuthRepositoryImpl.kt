@@ -51,4 +51,10 @@ class AuthRepositoryImpl @Inject constructor(
 
     }
 
+    override fun isUserLoggedIn(): Boolean {
+
+        return dataSource.isUserLoggedIn()
+
+    }
+
 }

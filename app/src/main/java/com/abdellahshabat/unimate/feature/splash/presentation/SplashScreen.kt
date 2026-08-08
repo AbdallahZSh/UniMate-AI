@@ -39,34 +39,26 @@ fun SplashScreen(navController: NavHostController) {
     val viewModel: SplashViewModel = hiltViewModel()    //تشغّل الكود مرة واحدة فقط عند ظهور الشاشة. LaunchedEffect
     val startDestination by viewModel.startDestination.collectAsState()
     //onCreate()  تشبه:
-    LaunchedEffect(Unit) {
-
-        delay(2000) //انتظر ثانيتين.
-
-        navController.navigate(Screen.OnBoarding.route) { //انتقل إلى الشاشة التالية.
-
-            popUpTo(Screen.Splash.route) {
-                inclusive = true  //احذف شاشة Splash نفسها أيضًا.
+    LaunchedEffect(startDestination) {
+        if(startDestination.isNotEmpty()) {
+            delay(2000) //انتظر ثانيتين.
+            navController.navigate(startDestination) { //انتقل إلى الشاشة التالية.
+                popUpTo(Screen.Splash.route) {
+                    inclusive = true  //احذف شاشة Splash نفسها أيضًا.
+                }
+                //popUpTo(...) هذه من أهم أوامر Navigation.
+                //بدونها سيكون الـ Back Stack: Splash OnBoarding
+                //وعند الضغط على زر الرجوع:
+                //⬅️ سيعود إلى Splash.
+                //أما باستخدام: popUpTo(...)
+                //سيصبح: OnBoarding فقط.
+                //أي أن Splash تُحذف من الذاكرة.
+                //لو كانت: false
+                //فستبقى داخل الـ Back Stack.
             }
-            //popUpTo(...)
-            //هذه من أهم أوامر Navigation.
-            //بدونها سيكون الـ Back Stack:
-            //Splash
-            //OnBoarding
-            //وعند الضغط على زر الرجوع:
-            //⬅️ سيعود إلى Splash.
-            //أما باستخدام:
-            //popUpTo(...)
-            //سيصبح:
-            //OnBoarding
-            //فقط.
-            //أي أن Splash تُحذف من الذاكرة.
-            //لو كانت:
-            //false
-            //فستبقى داخل الـ Back Stack.
         }
-
     }
+
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,

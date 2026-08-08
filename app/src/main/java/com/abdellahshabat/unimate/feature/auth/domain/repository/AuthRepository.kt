@@ -14,4 +14,6 @@ interface AuthRepository {
     suspend fun logout()
 
     fun currentUserId(): String?
+
+    fun isUserLoggedIn(): Boolean
 }
